@@ -1,3 +1,4 @@
+﻿import { Capacitor } from "@capacitor/core";
 import { useEffect, useRef, useState } from "react";
 import {
   LayoutDashboard, BookOpen, CalendarDays, ClipboardList,
@@ -443,7 +444,7 @@ function App() {
           : 0
       };
 
-      const response = await fetch("/api/ai/analyze", {
+      const response = await fetch(`${Capacitor.isNativePlatform() ? "https://studypilot-58sj.onrender.com" : ""}/api/ai/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ progress })
@@ -503,7 +504,7 @@ function App() {
           </div>
           <small>
             {task.subject_name || "General"}
-            {task.due_date ? " · " + task.due_date : ""}
+            {task.due_date ? " Â· " + task.due_date : ""}
           </small>
         </div>
         <button className="icon-btn danger"
@@ -828,7 +829,7 @@ function App() {
               <ClipboardList size={17}/>
               <div className="task-info">
                 <b>{task.title}</b>
-                <small>{task.completed ? "Completed" : "Pending"} · Task</small>
+                <small>{task.completed ? "Completed" : "Pending"} Â· Task</small>
               </div>
               <span className="event-label task-label">Task</span>
             </div>
@@ -887,7 +888,7 @@ function App() {
             <b>Study smarter.</b>
             <p>Your academic journey, organised in one place.</p>
           </div>
-          <div className="version">STUDYPILOT · VERSION 1.1</div>
+          <div className="version">STUDYPILOT Â· VERSION 1.1</div>
         </div>
       </aside>
 
@@ -1165,7 +1166,7 @@ function App() {
 
                 <div className="syllabus-summary">
                   <b>{topicCompleted} / {topics.length}</b>
-                  <span>Topics completed · {topicPercent}%</span>
+                  <span>Topics completed Â· {topicPercent}%</span>
                   <div className="progress-track">
                     <div className="progress-fill" style={{width: `${topicPercent}%`}}/>
                   </div>
@@ -1257,8 +1258,8 @@ function App() {
           </>}
 
           <footer>
-            StudyPilot <span>·</span> Your academic journey, one step at a time.
-            <span> · </span> Your data stays on your device.
+            StudyPilot <span>Â·</span> Your academic journey, one step at a time.
+            <span> Â· </span> Your data stays on your device.
           </footer>
         </div>
       </main>
@@ -1278,5 +1279,6 @@ function Stat({ icon: Icon, label, value, note, color }) {
 }
 
 export default App;
+
 
 
